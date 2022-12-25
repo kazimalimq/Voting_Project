@@ -3,12 +3,19 @@ const fs =  require('fs').promises;
 const path =  require('path');
 
 
+
 const app = express();
 
 const dataFile = path.join(__dirname, "data.json");
 
 //Support posting porm data with url encoded
 app.use(express.urlencoded({extended: true}))
+
+//enable cors
+app.use((req,res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    next();
+})
 
 
 app.get('/poll', async(req, res)=>{
